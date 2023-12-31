@@ -53,7 +53,7 @@ class Cell:
 
         line = Line(Point(from_x, from_y), Point(to_x, to_y))
 
-        line_color = "blue" if undo else "red"
+        line_color = "green" if undo else "red"
         self._win.draw_line(line, line_color)
     
     def has_wall_to(self, dir_i, dir_j):
