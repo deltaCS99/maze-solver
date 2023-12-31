@@ -8,8 +8,11 @@ def main():
     win = Window(800, 600)
     num_cols = 12
     num_rows = 10
-    maze = Maze(5, 5, num_rows, num_cols, 50, 50, win)
+    maze = Maze(5, 5, num_rows, num_cols, 50, 50, win = win)
     maze._break_entrance_and_exit()
+    maze._break_walls_r(0, 0)
+    maze._reset_cells_visited()
+    maze.solve()
 
     win.wait_for_close()
 

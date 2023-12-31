@@ -3,11 +3,12 @@ from point import Point
 from line import Line
 
 class Cell:
-    def __init__(self, x1, y1, x2, y2, win = None):
+    def __init__(self, x1, y1, x2, y2, visited = False, win = None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = visited
 
         self._x1 = x1
         self._y1 = y1
@@ -35,13 +36,13 @@ class Cell:
         if self.has_bottom_wall:
             self._win.draw_line(bottom_wall, fill_color)
         if not self.has_left_wall:
-            self._win.draw_line(left_wall, "white")
+            self._win.draw_line(left_wall, "#d9d9d9")
         if not self.has_right_wall:
-            self._win.draw_line(right_wall, "white")
+            self._win.draw_line(right_wall, "#d9d9d9")
         if not self.has_top_wall:
-            self._win.draw_line(top_wall, "white")
+            self._win.draw_line(top_wall, "#d9d9d9")
         if not self.has_bottom_wall:
-            self._win.draw_line(bottom_wall, "white")
+            self._win.draw_line(bottom_wall, "#d9d9d9")
 
     def draw_move(self, to_cell, undo=False):
         from_x = (self._x1 + self._x2) // 2
@@ -52,5 +53,15 @@ class Cell:
 
         line = Line(Point(from_x, from_y), Point(to_x, to_y))
 
-        line_color = "gray" if undo else "red"
+        line_color = "blue" if undo else "red"
         self._win.draw_line(line, line_color)
+    
+    def has_wall_to(self, dir_i, dir_j):
+        if dir_i == -1:
+            return self.has_left_wall
+        elif dir_i == 1:
+            return self.has_right_wall
+        elif dir_j == -1:
+            return self.has_top_wall
+        elif dir_j == 1:
+            return self.has_bottom_wall
